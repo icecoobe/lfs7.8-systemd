@@ -1,0 +1,10 @@
+# missing pkg listed by library-check.sh && version-check.sh
+
+## libgmp
+https://gmplib.org/
+
+## mpfr
+http://www.mpfr.org/mpfr-current/#download
+
+## mpc
+http://www.multiprecision.org/index.php?prog=mpc&page=download
