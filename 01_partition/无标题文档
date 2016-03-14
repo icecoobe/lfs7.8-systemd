@@ -1,0 +1,41 @@
+
+su
+
+mkfs.ext4 /dev/sda3
+mkswap /dev/sda4
+swapon /dev/sda4
+
+nano /etc/profile
+export LFS=/mnt/lfs
+
+mkdir -p $LFS
+
+mount -v -t ext4 /dev/<xxx> $LFS
+
+挂载点的概念很像指针
+指针变量的类型信息必须能够被当前的系统支持，比如windows系统不支持ext4文件系统，
+所以无法将ext4的fs挂载到Windows系统
+
+不使用分区方案，如果使用一个disk作为根分区，有点类似一个结构体来处理所有的disk管理操作
+struct {
+boot
+usr
+tmp
+run
+home
+...
+}
+
+使用挂载点的方案，类似如下
+struct {
+ void * boot
+ void *home
+ ext4 *run
+ ...
+}
+
+每个item可以动态的扩容，互相之间独立，万一某个分区坏了，可以只修复该分区。
+
+chroot的概念
+有点类似于Windows系统中存在另一份Windows文件夹，如果将系统的内部指针由c:\windows指向该文件夹，
+那么系统的各项组件将替换成我们制定的文件夹下的组件。
